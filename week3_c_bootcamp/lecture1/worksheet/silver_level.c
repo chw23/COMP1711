@@ -1,5 +1,7 @@
 # include <stdio.h>
 
+/*
+// question 3
 int main () {
     int mark;
 
@@ -23,4 +25,22 @@ int main () {
     }
     
 return 0;
+}
+*/
+
+// question 4
+int main () {
+    int temp = 0;
+
+
+    printf("Please enter the current temperature: ");
+    scanf("%d", &temp);
+
+    if (temp <= 40 && temp >= -10) {
+        printf("Temperature is within the range.\n");
+    }
+    else {
+        printf("Temperature is out of the range.\n");
+    }
+    return 0;
 }
