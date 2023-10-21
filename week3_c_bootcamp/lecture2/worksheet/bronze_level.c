@@ -24,3 +24,22 @@ int main () {
 */
 
 // question 2
+
+float SphereVolume (float r) {
+    float volume;
+    volume = ((4.0 / 3.0) * 3.14 * (r * r * r));
+    return volume;
+}
+
+int main () {
+    float radius;
+    float result;
+
+    printf("Please enter the radius: ");
+    scanf("%f", &radius);
+    result = SphereVolume(radius);
+
+    printf("The volume of the sphere is %.2f.\n", result);
+
+    return 0;
+}
