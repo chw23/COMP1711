@@ -14,10 +14,10 @@ int main() {
     int length;
 
     printf("Enter any string : ");
-    fgets(str);
+    scanf("%s", str);
     length = length_of_string(str);
 
-    printf("The length of the given string : %d", length);
+    printf("The length of the given string : %d\n", length);
 
     return 0;
 }
