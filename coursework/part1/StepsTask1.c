@@ -54,10 +54,10 @@ int main() {
     int buffer_size = 100;
     char buffer[buffer_size];
 
-    while(fgets(buffer, buffer_size, data) != NULL) {
+    for (fgets(buffer, buffer_size, data) != NULL) {
         printf("%s", buffer);
     }
-    fclose(file);
+    fclose(data);
 
     return 0;
 
