@@ -44,5 +44,21 @@ void tokeniseRecord(const char *input, const char *delimiter,
 // Complete the main function
 int main() {
 
+    FILE *data;
+    data = fopen("FitnessData_2023.csv", "r");
+    if (data == NULL) {
+        perror("");
+        return 1;
+    }
+
+    int buffer_size = 100;
+    char buffer[buffer_size];
+
+    while(fgets(buffer, buffer_size, data) != NULL) {
+        printf("%s", buffer);
+    }
+    fclose(file);
+
+    return 0;
 
 }
