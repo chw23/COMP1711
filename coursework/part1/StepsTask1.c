@@ -10,7 +10,7 @@ typedef struct {
 } FITNESS_DATA;
 
 // Define any additional variables here
-
+    
 
 
 // This is your helper function. Do not change it in any way.
@@ -43,6 +43,9 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
+    int buffer_size = 100;
+    char buffer[buffer_size];
+    int i;
 
     FILE *data;
     data = fopen("FitnessData_2023.csv", "r");
@@ -51,10 +54,9 @@ int main() {
         return 1;
     }
 
-    int buffer_size = 100;
-    char buffer[buffer_size];
-
-    for (fgets(buffer, buffer_size, data) != NULL) {
+//printf("Number of records in file: %d\n", );
+    for (i = 1; i <= 3; i++) {
+        fgets(buffer, buffer_size, data);
         printf("%s", buffer);
     }
     fclose(data);
