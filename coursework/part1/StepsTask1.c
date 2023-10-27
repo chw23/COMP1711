@@ -46,6 +46,7 @@ int main() {
     int buffer_size = 100;
     char buffer[buffer_size];
     int i;
+    int x = 0;
 
     FILE *data;
     data = fopen("FitnessData_2023.csv", "r");
@@ -53,8 +54,15 @@ int main() {
         perror("");
         return 1;
     }
+    /*
+    while (fgets(buffer, buffer_size, data) != NULL)
+    {
+        x = x + 1;
+    }
+    */
 
-//printf("Number of records in file: %d\n", );
+    printf("Number of records in file: %d\n", x);
+
     for (i = 1; i <= 3; i++) {
         fgets(buffer, buffer_size, data);
         printf("%s", buffer);
