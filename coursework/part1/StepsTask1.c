@@ -49,6 +49,7 @@ int main() {
     char buffer2[buffer2_size];
     int i;
     int x = 0;
+    
 
     FILE *data;
     data = fopen("FitnessData_2023.csv", "r");
@@ -57,16 +58,27 @@ int main() {
         return 1;
     }
     
-    while (fgets(buffer, buffer_size, data) != NULL)
-    {
+    while (fgets(buffer, buffer_size, data) != NULL) {
         x = x + 1;
     }
 
     printf("Number of records in file: %d\n", x);
 
-    for (i = 1; i <= 3; i++) {
-        fgets(buffer2, buffer2_size, data);
-        printf("%s",buffer2);
+    FILE *data2;
+    data2 = fopen("FitnessData_2023.csv", "r");
+    if (data2 == NULL) {
+        perror("");
+        return 1;
+    }
+
+    for (i = 0; i < 3; i++) {
+        char date[11];
+        char time[6];
+        char steps[10];
+        fgets(buffer2, buffer2_size, data2);
+        tokeniseRecord(buffer2, ",", date, time, steps);
+        printf("%s/%s/%s", date, time, steps);
+        
     }
 
     fclose(data);
