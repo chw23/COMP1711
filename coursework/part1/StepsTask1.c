@@ -47,6 +47,7 @@ int main() {
     int buffer2_size = 30;
     char buffer[buffer_size];
     char buffer2[buffer2_size];
+    int stepsint;
     int i;
     int x = 0;
     
@@ -77,7 +78,9 @@ int main() {
         char steps[10];
         fgets(buffer2, buffer2_size, data2);
         tokeniseRecord(buffer2, ",", date, time, steps);
-        printf("%s/%s/%s", date, time, steps);
+        printf("%s/%s/", date, time);
+        stepsint = atoi(steps);
+        printf("%d\n", stepsint);
         
     }
 
