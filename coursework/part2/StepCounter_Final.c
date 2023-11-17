@@ -12,7 +12,7 @@
 // This is your helper function. Do not change it in any way.
 // Inputs: character array representing a row; the delimiter character
 // Ouputs: date character array; time character array; steps character array
-/*
+
 void tokeniseRecord(const char *input, const char *delimiter,
                     char *date, char *time, char *steps) {
     // Create a copy of the input string as strtok modifies the string
@@ -37,12 +37,14 @@ void tokeniseRecord(const char *input, const char *delimiter,
     free(inputCopy);
 
                     }
-*/
+
 
 
 // Inspired by week7 material: code.c 
 // Complete the main function
 int main() {
+    FITNESS_DATA DATA[100];
+
    char buffer[buffer_size];
 
    char choice;
@@ -67,23 +69,43 @@ int main() {
     switch (choice) {
         case 'A':
         case 'a':
-            printf("Input filename: %s\n", input);
             if (!input) {
                 printf("Error: Could not find or open the file.\n");
             }
             else {
+                printf("Input filename: \n");
                 printf("File successfully loaded.\n");
             }
+
             break;
 
         case 'B':
         case 'b':
-            return 0;
+            counter = 0;
+            while (fgets(buffer, buffer_size, input) != NULL) {
+                counter = counter + 1;
+            }
+            printf("Total number of records in the file: %d\n", counter);
             break;
 
         case 'C':
         case 'c':
-            return 0;
+            counter = 0;
+            int minimum = 10000;
+            int intsteps;
+            char min_date;
+            char min_time;
+            while (fgets(buffer, buffer_size, input)) {
+                tokeniseRecord(buffer, ",", &DATA[counter].date, &DATA[counter].time, &DATA[counter].steps);
+                intsteps = atoi(steps);
+                if (steps < minimum) {
+                    minimum = DATA[counter].steps;
+                    min_date = DATA[counter].date;
+                    min_time = DATA[counter].time;
+                }
+                counter++;
+            }
+            printf("The date and time of the timeslot with the fewest steps: %s/%s", min_date, min_time);
             break;
 
         case 'D':
