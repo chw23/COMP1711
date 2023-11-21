@@ -6,16 +6,15 @@ int main()
     reading daily_readings[100];
 
     char line[buffer_size];
-    char filename[buffer_size];
+    char filename[buffer_size] = "data.txt";
 
     // get filename from the user
-    printf("Please enter the name of the data file: ");
+
 
     // these lines read in a line from the stdin (where the user types)
     // and then takes the actual string out of it
     // this removes any spaces or newlines.
-    fgets(line, buffer_size, stdin);
-    sscanf(line, " %s ", filename);
+
 
     char choice;
     int counter = 0;
@@ -113,7 +112,7 @@ int main()
             printf("Your lowest blood iron level was %.1f\n", minimum);
             fclose(input);
             break;
-
+/*
         case 'E':
         case 'e':
             char month;
@@ -124,7 +123,7 @@ int main()
                 counter++;
             }
             break;
-
+*/
         case 'F':
         case 'f':
             return 0;
