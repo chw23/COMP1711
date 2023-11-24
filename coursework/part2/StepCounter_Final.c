@@ -18,12 +18,14 @@ int main() {
 
    char choice;
    char filename[] = "FitnessData_2023.csv";
-   int counter = 0;
+   int counter;
+   int intsteps;
    
    while (1) {
     FILE *input;
     input = fopen(filename, "r");
 
+    printf("Menu option:\n");
     printf("A: Specify the filename to be imported\n");
     printf("B: Display the total number of records in the file\n");
     printf("C: Find the date and time of the timeslot with the fewest steps\n");
@@ -31,7 +33,7 @@ int main() {
     printf("E: Find the mean step count of all the records in the file\n");
     printf("F: Find the longest continuous period where the step count is above 500 steps\n");
     printf("Q: Exit the program\n");
-
+    printf("Enter choice: ");
     choice = getchar();
 
     while (getchar() != '\n');
@@ -46,7 +48,6 @@ int main() {
                 printf("Input filename: %s\n", filename);
                 printf("File successfully loaded.\n");
             }
-
             break;
 
         case 'B':
@@ -62,33 +63,52 @@ int main() {
         case 'c':
             counter = 0;
             int minimum = 10000;
-            int intsteps;
             char min_date;
             char min_time;
-            while (fgets(buffer, buffer_size, input) != NULL) {
-                tokeniseRecord(buffer, ",", date, time, steps);
-                intsteps = atoi(steps);
-                printf("%s/%s/", date, time);
-                intsteps = atoi(steps);
-                printf("%d\n", intsteps);
-                /*if (steps < minimum) {
-                    minimum = DATA[counter].steps;
-                    min_date = DATA[counter].date;
-                    min_time = DATA[counter].time;
-                }*/
+            while (fgets(buffer, buffer_size, input)) {
+                tokeniseRecord(buffer, ",", DATA[counter].date, DATA[counter].time, DATA[counter].steps);
+                intsteps = atoi(DATA[counter].steps);
+                if (intsteps < minimum) {
+                    minimum = intsteps;
+                    //strcpy(DATA[counter].date, min_date);
+                    //strcpy(DATA[counter].time, min_time);
+                }
                 counter++;
             }
-            //printf("The date and time of the timeslot with the fewest steps: %s/%s", min_date, min_time);
+            //printf("The date and time of the timeslot with the fewest steps: %s/%s\n", min_date, min_time);
             break;
-
+        
         case 'D':
         case 'd':
-            return 0;
+            counter = 0;
+            int maximum = 0;
+            char max_date;
+            char max_time;
+            while (fgets(buffer, buffer_size, input)) {
+                tokeniseRecord(buffer, ",", DATA[counter].date, DATA[counter].time, DATA[counter].steps);
+                intsteps = atoi(DATA[counter].steps);
+                if (intsteps > maximum) {
+                    maximum = intsteps;
+                    //max_date = DATA[counter].date;
+                    //max_time = DATA[counter].time;
+                }
+                counter++;
+            }
+            //printf("The date and time of the timeslot with the largest number of steps: %d/%d\n", max_date, max_time);
             break;
 
         case 'E':
         case 'e':
-            return 0;
+            counter = 0;
+            int mean = 0;
+            while (fgets(buffer, buffer_size, input)) {
+                tokeniseRecord(buffer, ",", DATA[counter].date, DATA[counter].time, DATA[counter].steps);
+                intsteps = atoi(DATA[counter].steps);
+                mean = (mean + intsteps);
+                counter++;
+            }
+            mean = (mean/counter);
+            printf("The mean step count of all the records is %d.\n", mean);
             break;
 
         case 'F':

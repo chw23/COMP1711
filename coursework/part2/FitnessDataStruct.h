@@ -12,7 +12,7 @@
 typedef struct {
 	char date[20];
 	char time[6];
-	int steps;
+	char steps[10];
 } FITNESS_DATA;
 
 // Helper function prototypes
@@ -40,6 +40,8 @@ void tokeniseRecord(const char *input, const char *delimiter,
     free(inputCopy);
 
                     }
+
+
 
 #endif // FITNESS_DATA_STRUCT_H
   
