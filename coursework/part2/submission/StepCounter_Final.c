@@ -15,16 +15,15 @@ int main() {
     FITNESS_DATA DATA[100];
 
    char buffer[buffer_size];
+   char inputbuffer[buffer_size];
 
    char choice;
-   char filename[] = "FitnessData_2023.csv";
+   char filename;
    int counter;
    int intsteps;
    
    while (1) {
-    FILE *input;
-    input = fopen(filename, "r");
-
+    
     printf("Menu option:\n");
     printf("A: Specify the filename to be imported\n");
     printf("B: Display the total number of records in the file\n");
@@ -41,14 +40,20 @@ int main() {
     switch (choice) {
         case 'A':
         case 'a':
+            FILE *input;
+            input = fopen(filename, "r");
+
+            printf("Input filename: ");
+            fgets(inputbuffer, buffer_size, stdin);
+            sscanf(inputbuffer, "%s", filename);
             if (!input) {
                 printf("Error: Could not find or open the file.\n");
                 return(1);
             }
             else {
-                printf("Input filename: %s\n", filename);
                 printf("File successfully loaded.\n");
             }
+            return 0;
             break;
 
         case 'B':
@@ -58,6 +63,7 @@ int main() {
                 counter += 1;
             }
             printf("Total records: %d\n", counter);
+            return 0;
             break;
 
         case 'C':
@@ -77,6 +83,7 @@ int main() {
                 counter++;
             }
             printf("Fewest steps: %s %s\n", min_date, min_time);
+            return 0;
             break;
         
         case 'D':
@@ -96,6 +103,7 @@ int main() {
                 counter++;
             }
             printf("Largest steps: %s %s\n", max_date, max_time);
+            return 0;
             break;
 
         case 'E':
@@ -110,11 +118,12 @@ int main() {
             }
             mean = (mean/counter);
             printf("Mean step count: %d\n", mean);
+            return 0;
             break;
 
         case 'F':
         case 'f':
-            /*counter = 0;
+        /*counter = 0;
             int range = 0;
             int max_range = 0;
             int previous = 0;
@@ -147,7 +156,7 @@ int main() {
 
             printf("Longest period start: %s %s\n", Start_D, Start_T);
             printf("Longest period end: %s %s\n", End_D, End_T);*/
-            return 0;
+            return 0;                                                                                                                                  
             break;
 
         case 'Q':
