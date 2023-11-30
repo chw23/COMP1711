@@ -12,17 +12,17 @@
 // Inspired by week7 material: code.c 
 // Complete the main function
 int main() {
-    FITNESS_DATA DATA[100];
+    FITNESS_DATA DATA[150];
 
-   char buffer[buffer_size];
-   char inputbuffer[buffer_size];
+    char inputbuffer[buffer_size];
+    char buffer[buffer_size];
 
-   char choice;
-   char filename;
-   int counter;
-   int intsteps;
-   
-   while (1) {
+    char choice;
+    char filename[buffer_size];
+    int counter;
+    int intsteps;
+
+    while (1) {
     
     printf("Menu option:\n");
     printf("A: Specify the filename to be imported\n");
@@ -40,12 +40,14 @@ int main() {
     switch (choice) {
         case 'A':
         case 'a':
-            FILE *input;
-            input = fopen(filename, "r");
 
             printf("Input filename: ");
             fgets(inputbuffer, buffer_size, stdin);
             sscanf(inputbuffer, "%s", filename);
+
+            FILE *input;
+            input = fopen(filename, "r");
+
             if (!input) {
                 printf("Error: Could not find or open the file.\n");
                 return(1);
@@ -53,7 +55,6 @@ int main() {
             else {
                 printf("File successfully loaded.\n");
             }
-            return 0;
             break;
 
         case 'B':
@@ -63,7 +64,6 @@ int main() {
                 counter += 1;
             }
             printf("Total records: %d\n", counter);
-            return 0;
             break;
 
         case 'C':
@@ -83,7 +83,6 @@ int main() {
                 counter++;
             }
             printf("Fewest steps: %s %s\n", min_date, min_time);
-            return 0;
             break;
         
         case 'D':
@@ -103,7 +102,6 @@ int main() {
                 counter++;
             }
             printf("Largest steps: %s %s\n", max_date, max_time);
-            return 0;
             break;
 
         case 'E':
@@ -118,7 +116,6 @@ int main() {
             }
             mean = (mean/counter);
             printf("Mean step count: %d\n", mean);
-            return 0;
             break;
 
         case 'F':
