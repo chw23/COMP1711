@@ -6,7 +6,7 @@
 #define FITNESS_DATA_STRUCT_H
 
 #include <stdio.h>
-#define buffer_size 100
+#define buffer_size 150
 
 // Define an appropriate struct
 typedef struct {

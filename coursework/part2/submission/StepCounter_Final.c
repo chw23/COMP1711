@@ -42,9 +42,9 @@ int main() {
         case 'a':
 
             printf("Input filename: ");
-            fgets(inputbuffer, buffer_size, stdin);
-            sscanf(inputbuffer, "%s", filename);
-
+            fgets(buffer, buffer_size, stdin);
+            sscanf(buffer, "%s", filename);
+            
             FILE *input;
             input = fopen(filename, "r");
 
@@ -59,6 +59,7 @@ int main() {
 
         case 'B':
         case 'b':
+            rewind(input);  //to read input from the beginning 
             counter = 0;
             while (fgets(buffer, buffer_size, input) != NULL) {
                 counter += 1;
@@ -68,10 +69,11 @@ int main() {
 
         case 'C':
         case 'c':
+            rewind(input);
             counter = 0;
             int minimum = 10000;
             char min_date[20];
-            char min_time[6];
+            char min_time[10];
             while (fgets(buffer, buffer_size, input)) {
                 tokeniseRecord(buffer, ",", DATA[counter].date, DATA[counter].time, DATA[counter].steps);
                 intsteps = atoi(DATA[counter].steps);
@@ -87,10 +89,11 @@ int main() {
         
         case 'D':
         case 'd':
+            rewind(input);
             counter = 0;
             int maximum = 0;
             char max_date[20];
-            char max_time[6];
+            char max_time[10];
             while (fgets(buffer, buffer_size, input)) {
                 tokeniseRecord(buffer, ",", DATA[counter].date, DATA[counter].time, DATA[counter].steps);
                 intsteps = atoi(DATA[counter].steps);
@@ -106,8 +109,9 @@ int main() {
 
         case 'E':
         case 'e':
+            rewind(input);
             counter = 0;
-            int mean = 0;
+            float mean = 0;
             while (fgets(buffer, buffer_size, input)) {
                 tokeniseRecord(buffer, ",", DATA[counter].date, DATA[counter].time, DATA[counter].steps);
                 intsteps = atoi(DATA[counter].steps);
@@ -115,7 +119,8 @@ int main() {
                 counter++;
             }
             mean = (mean/counter);
-            printf("Mean step count: %d\n", mean);
+            int roundmean = round(mean);
+            printf("Mean step count: %d\n", roundmean);
             break;
 
         case 'F':
@@ -158,6 +163,7 @@ int main() {
 
         case 'Q':
         case 'q':
+            fclose(input);
             return 0;
             break;
         
