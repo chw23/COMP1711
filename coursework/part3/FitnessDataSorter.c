@@ -47,23 +47,28 @@ int main() {
     }
 
     while (fgets(buffer, buffer_size, input) != NULL) {
-        tokeniseRecord(buffer, ',', DATA[counter].date, DATA[counter].time, &DATA[counter].steps); //this pass the value into the array no matter it is correct or wrong
-        printf("%d\n", DATA[counter].steps);
-        
-        if (DATA[counter].date == NULL) {
+        tokeniseRecord(buffer, ',', DATA[counter].date, DATA[counter].time, &DATA[counter].steps);
+        if (DATA[counter].date[7] && DATA[counter].date[4] != 45) {
             printf("Error: invalid file.\n");
             return(1);
         }
-        if (DATA[counter].time == NULL) {
+
+        if (DATA[counter].time[2] != 58) {
             printf("Error: invalid file.\n");
             return(1);
         }
-        if (&DATA[counter].steps == NULL) {
+
+        char csteps[4];
+        sprintf (csteps, "%d", DATA[counter].steps);
+        printf("%s\n", csteps);
+        if (csteps[0] <= 48  || csteps[0] > 57) {
             printf("Error: invalid file.\n");
             return(1);
         }
         counter++;
     }
+
+    
 
     return 0;
 }
