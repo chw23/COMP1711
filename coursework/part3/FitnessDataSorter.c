@@ -33,6 +33,7 @@ int main() {
     char buffer[buffer_size];
     char filename[buffer_size];
     int counter = 0;
+    int i = 0;
     
     printf("Enter filename: ");
     fgets(buffer, buffer_size, stdin);
@@ -60,7 +61,6 @@ int main() {
 
         char csteps[4];
         sprintf (csteps, "%d", DATA[counter].steps);
-        printf("%s\n", csteps);
         if (csteps[0] <= 48  || csteps[0] > 57) {
             printf("Error: invalid file.\n");
             return(1);
@@ -68,7 +68,29 @@ int main() {
         counter++;
     }
 
-    
+    // I based this on ideas I found here:
+    // https://discuss.codechef.com/t/sorting-structure-in-c-using-qsort/49541/3
+    // https://www.youtube.com/watch?v=rHoOWG6Ihs4&ab_channel=PortfolioCourses
+    // Also the discussion with chatGPT on clarifying the functions and codes
 
+    int compare (const void *ps1, const void *ps2) {
+        const FitnessData *s1 = (const FitnessData *)ps1;
+        const FitnessData *s2 = (const FitnessData *)ps2;
+        int step1 = s1 -> steps;
+        int step2 = s2 -> steps;
+        return (step2 - step1);
+    }
+
+    size_t size = sizeof(DATA) / sizeof(DATA[0]);
+    qsort(DATA, counter, sizeof(FitnessData), compare);
+
+    strcat(filename, ".tsv");
+
+    FILE *output;
+    output = fopen(filename, "w+");
+    for (i = 0; i < counter; i++) {
+        fprintf(output, "%s\t%s\t%d\n", DATA[i].date, DATA[i].time, DATA[i].steps);
+    }
+    fclose(output);
     return 0;
 }
