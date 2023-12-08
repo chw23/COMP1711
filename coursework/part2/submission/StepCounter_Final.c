@@ -125,6 +125,35 @@ int main() {
 
         case 'F':
         case 'f':
+            //mostly ok but need to work on start_index
+            //how to avoid clearing the start_index of the real longest period 
+            counter = 0;
+            int acc = 0;
+            int start_index = 0;
+            int longest_period = 0;
+
+            while (fgets(buffer, buffer_size, input)) {
+                tokeniseRecord(buffer, ",", DATA[counter].date, DATA[counter].time, DATA[counter].steps);
+
+                if (DATA[counter].steps >= 500) {
+                    acc++;
+                    if (DATA[counter - 1].steps < 500) {
+                        if 
+                        start_index = counter;
+                    }
+                    
+                }
+                else {
+                    if (acc <= longest_period) {
+                        acc = 0;
+                    }
+                    else {
+                        longest_period = acc;
+                        acc = 0;
+                    }
+                }
+                counter++;
+            }
         /*counter = 0;
             int range = 0;
             int max_range = 0;
