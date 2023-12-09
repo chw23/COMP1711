@@ -135,9 +135,9 @@ int main() {
             while (fgets(buffer, buffer_size, input)) {
                 tokeniseRecord(buffer, ",", DATA[counter].date, DATA[counter].time, DATA[counter].steps);
 
-                if (DATA[counter].steps >= 500) {
+                if (atoi(DATA[counter].steps) >= 500) {
                     acc++;
-                    if (DATA[counter - 1].steps < 500) {
+                    if (atoi(DATA[counter - 1].steps) < 500) {
                         if 
                         start_index = counter;
                     }
