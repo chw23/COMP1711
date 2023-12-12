@@ -125,8 +125,7 @@ int main() {
 
         case 'F':
         case 'f':
-            //mostly ok but need to work on start_index
-            //how to avoid clearing the start_index of the real longest period 
+        // I tried to complete this option but I am still stuck with the comparison of the actual start_index and temporary start_index
             counter = 0;
             int acc = 0;
             int start_index = 0;
@@ -138,7 +137,6 @@ int main() {
                 if (atoi(DATA[counter].steps) >= 500) {
                     acc++;
                     if (atoi(DATA[counter - 1].steps) < 500) {
-                        if 
                         start_index = counter;
                     }
                     
@@ -154,39 +152,8 @@ int main() {
                 }
                 counter++;
             }
-        /*counter = 0;
-            int range = 0;
-            int max_range = 0;
-            int previous = 0;
-            char Start_D[20];
-            char Start_T[6];
-            char End_D[20];
-            char End_T[6];
-            
-            while (fgets(buffer, buffer_size, input)) {
-                tokeniseRecord(buffer, ",", DATA[counter].date, DATA[counter].time, DATA[counter].steps);
-                intsteps = atoi(DATA[counter].steps);
-                if (intsteps > 500) {
-                    if (previous <= 500) {
-                        range = 0;
-                        strcpy(Start_D, DATA[counter].date);
-                        strcpy(Start_T, DATA[counter].time);
-                    }
-                    range++;
-                }
-                else {
-                    if (range > max_range) {
-                        max_range = range;
-                        strcpy(End_D, DATA[counter - 1].date);
-                        strcpy(End_T, DATA[counter - 1].time);
-                    }
-                    
-                }
-                counter++;
-            }
-
-            printf("Longest period start: %s %s\n", Start_D, Start_T);
-            printf("Longest period end: %s %s\n", End_D, End_T);*/
+            printf("Longest period start: %s %s\n", DATA[start_index].date, DATA[start_index].time);
+            printf("Longest period end: %s %s\n", DATA[start_index + longest_period].date, DATA[start_index + longest_period].time);
             return 0;                                                                                                                                  
             break;
 
