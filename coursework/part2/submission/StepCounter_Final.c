@@ -125,35 +125,35 @@ int main() {
 
         case 'F':
         case 'f':
-        // I tried to complete this option but I am still stuck with the comparison of the actual start_index and temporary start_index
             counter = 0;
             int acc = 0;
             int start_index = 0;
             int longest_period = 0;
+            int current_start_index = 0; // saving the starting index of current period
 
             while (fgets(buffer, buffer_size, input)) {
                 tokeniseRecord(buffer, ",", DATA[counter].date, DATA[counter].time, DATA[counter].steps);
 
-                if (atoi(DATA[counter].steps) >= 500) {
-                    acc++;
-                    if (atoi(DATA[counter - 1].steps) < 500) {
-                        start_index = counter;
-                    }
-                    
+                if (atoi(DATA[counter].steps) > 500) {
+                    acc++;  
                 }
                 else {
-                    if (acc <= longest_period) {
-                        acc = 0;
-                    }
-                    else {
+                    if (acc > longest_period) {
                         longest_period = acc;
-                        acc = 0;
+                        start_index = current_start_index;
                     }
+                    acc = 0;
+                    current_start_index = counter + 1; // to update index of the next row
                 }
                 counter++;
             }
+
+            if (acc > longest_period) {
+                longest_period = acc;
+                start_index = current_start_index;
+            }
             printf("Longest period start: %s %s\n", DATA[start_index].date, DATA[start_index].time);
-            printf("Longest period end: %s %s\n", DATA[start_index + longest_period].date, DATA[start_index + longest_period].time);
+            printf("Longest period end: %s %s\n", DATA[start_index + longest_period - 1].date, DATA[start_index + longest_period - 1].time);
             return 0;                                                                                                                                  
             break;
 
